@@ -14,15 +14,15 @@ import java.util.Scanner;
  */
 public class StateTable {
     File stateFile;
-    ArrayList<StateTableConfig> configList;
-    ArrayList<StateTableTimerDef> timerDefList;
-    ArrayList<StateTableMiscConfigData> miscConfigDataList;
-    ArrayList<StateTableEnhancedParamsDef> enhancedParamsDefList;
-    ArrayList<StateTableScreenDef> screenDefList;
-    ArrayList<StateTableStateDef> stateDefList;
-    ArrayList<StateTableState> stateList;
-    ArrayList<StateTableHostStateDef> hostStateDefList;
-    ArrayList<StateTableOarDef> oarDefList;
+    public ArrayList<StateTableConfig> configList;
+    public ArrayList<StateTableTimerDef> timerDefList;
+    public ArrayList<StateTableMiscConfigData> miscConfigDataList;
+    public ArrayList<StateTableEnhancedParamsDef> enhancedParamsDefList;
+    public ArrayList<StateTableScreenDef> screenDefList;
+    public ArrayList<StateTableStateDef> stateDefList;
+    public ArrayList<StateTableState> stateList;
+    public ArrayList<StateTableHostStateDef> hostStateDefList;
+    public ArrayList<StateTableOarDef> oarDefList;
     String[] keywords = {"CONFIG","TIMER_DEF", "MISC_CONFIG_DATA", "ENHANCED_PARAMS_DEF", "SCREEN_DEF", "STATE_DEF", "STATE_TABLE", "HOST_STATE_DEF", "OAR_DEF", "PRINT_DEF"};
     Scanner scanner;
     String mode = "NONE";
@@ -325,7 +325,7 @@ public class StateTable {
                     sts.addParam(tempstscr);
                 else
                 {
-                    sts.addParam("<undefined_screen>" + words[wi]);
+                    sts.addParam("<undef>" + words[wi]);
                     System.out.println("Error : Screen definition for " + words[wi] + " is not found");
                 }
             }
@@ -340,10 +340,14 @@ public class StateTable {
             }
             else if(tempstsd.paramList.get(loop).equals("number"))
             {
-                Integer integer = Integer.getInteger(words[wi]);
+                //System.out.println("Converting " + words[wi]);
+                Integer integer = new Integer(Integer.parseInt(words[wi]));//Integer.getInteger(words[wi]);
+                System.out.println(integer);
                 sts.addParam(integer);
             }
         }
+        //Object tempObj = new Object();
+        
         stateList.add(sts);
     }
     
